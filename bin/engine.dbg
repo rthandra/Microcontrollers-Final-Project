@@ -1,0 +1,55 @@
+  XREF enginecounter, enginesequence,counters, PORT_P, enginesequence1,enginesequence2,enginesequence3,enginesequence4
+  XDEF stepper
+  
+ 
+  
+   stepper: PSHX
+            PSHY
+            PSHB
+            PSHA
+            
+ 
+   loup:
+            LDAA enginecounter
+            CMPA #0
+            BEQ sequence1
+            CMPA #1
+            BEQ sequence2
+            CMPA #2
+            BEQ sequence3
+            CMPA #3
+            BEQ sequence4
+            CMPA #4
+            BEQ reset
+            
+            
+  sequence1:
+                 LDAB enginesequence1
+                 STAB PORT_P
+                  INC enginecounter
+                  BRA exit6
+  sequence2:
+                 LDAB enginesequence2
+                 STAB PORT_P
+                 INC enginecounter
+                 BRA exit6
+  sequence3:
+                 LDAB enginesequence3
+                 STAB PORT_P
+                 INC enginecounter
+                 BRA exit6
+  sequence4:
+                 LDAB enginesequence4
+                 STAB PORT_P
+                 INC enginecounter
+                 BRA exit6
+  reset:
+                 MOVB #0,enginecounter
+                 
+  exit6:
+
+           PULA
+           PULB
+           PULX
+           PULY
+           RTS

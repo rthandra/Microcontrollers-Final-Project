@@ -1,0 +1,30 @@
+
+  XREF port_T,LED,HLval
+  XDEF lights
+
+     
+
+lights: 
+      PSHA
+      LDAA port_T
+      ANDA #%10000000
+      CMPA #%10000000     
+      BEQ lighton
+      LDAA port_T
+      ANDA #%10000000
+      CMPA #0
+      BEQ lightoff
+
+lighton:
+       LDAA #%00011000
+       STAA LED
+       STAA HLval
+       BRA exitheadlights
+       
+lightoff:
+       MOVB #0,LED
+       MOVB #0,HLval
+             
+exitheadlights:
+       PULA
+       RTS

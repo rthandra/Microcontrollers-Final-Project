@@ -1,0 +1,14 @@
+ 
+ XREF port_T_ddr,emergency,INT_CR, ignitions_flag, IRQ_flag
+ XDEF IRQ_ISR
+ 
+ IRQ_ISR:
+        MOVB #$FF, ignitions_flag
+        ;BRSET IRQ_flag,#$FF,exit_IRQ
+        JSR emergency
+        MOVB #128, port_T_ddr
+       
+        
+ exit_IRQ:
+         MOVB #00,INT_CR
+         RTI 

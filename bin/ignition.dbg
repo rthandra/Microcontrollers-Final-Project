@@ -1,0 +1,24 @@
+ 
+  XREF read_pot, pot_value, ignitions_flag
+  XDEF ignition
+  
+  
+  
+  ignition:
+          
+           
+          JSR read_pot
+          LDD pot_value
+          LDX #128 
+          IDIV 
+          
+          CMPB #50
+          BHS start_engine
+          BLO ignition
+          
+  start_engine:
+           MOVB #00,ignitions_flag
+           
+          
+           RTS
+  
